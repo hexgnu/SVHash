@@ -20,6 +20,14 @@ describe "encoding" do
     e.encode([-0.814453125, 1.560546875, -0.189453125, 0.310546875]).should == "568ii5tr"
   end
   
+  it 'throws MalformedDataError if not numeric' do
+    e = SocialHash::Encoder.new(4, -2, 2)
+    lambda { e.encode(%w[a b c d]) }.should raise_error(SocialHash::MalformedDataError)
+    lambda { e.encode(nil,nil,nil,nil)}.should raise_error(SocialHash::MalformedDataError)
+    lambda { e.encode(1, 2, 3,4) }.should_not raise_error(SocialHash::MalformedDataError)
+    lambda { e.encode(1.0, 1.0, 1.0, 1.0)}.should_not raise_error(SocialHash::MalformedDataError)
+  end
+  
   context "base 10" do
     it 'returns an int for base 10' do
       SocialHash.configure do |c|

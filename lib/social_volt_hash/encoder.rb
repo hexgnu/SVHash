@@ -52,7 +52,9 @@ module SocialHash
     def find_binary(coordinate)
       binary = []
       minmax = [min,max]
-      
+      if !coordinate.kind_of?(Numeric)
+        raise MalformedDataError, "Was given a coordinate of type #{coordinate.class} instead of being a Numeric"
+      end
       
       while binary.length < 10
         mid = (minmax[0] + minmax[1]).to_f / 2
