@@ -19,4 +19,37 @@ describe "encoding" do
     e = SocialHash::Encoder.new(4, -2, 2)
     e.encode([-0.814453125, 1.560546875, -0.189453125, 0.310546875]).should == "568ii5tr"
   end
+  
+  context "base 10" do
+    it 'returns an int for base 10' do
+      SocialHash.configure do |c|
+        c.base = 36
+      end
+      e = SocialHash::Encoder.new(4, -2, 2)
+      first = e.encode(-0.814453125, 1.560546875, -0.189453125, 0.310546875)
+      
+      SocialHash.configure do |c|
+        c.base = 10
+      end
+      
+      e = SocialHash::Encoder.new(4, -2, 2)
+      e.encode(-0.814453125, 1.560546875, -0.189453125, 0.310546875).should == first.to_i(36)
+      
+    end
+    
+    it 'returns the same numerical version for any base' do
+      SocialHash.configure do |c|
+        c.base = 36
+      end
+      e = SocialHash::Encoder.new(4, -2, 2)
+      first = e.encode(-0.814453125, 1.560546875, -0.189453125, 0.310546875)
+
+      SocialHash.configure do |c|
+        c.base = 20
+      end
+
+      e = SocialHash::Encoder.new(4, -2, 2)
+      e.encode(-0.814453125, 1.560546875, -0.189453125, 0.310546875).to_i(20).should == first.to_i(36)
+    end
+  end
 end

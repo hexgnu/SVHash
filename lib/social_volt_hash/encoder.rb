@@ -42,7 +42,11 @@ module SocialHash
         end
       end
       
-      binary.to_i(2).to_s(36)
+      if SocialHash.configuration.base == 10
+        binary.to_i(2)
+      else
+        binary.to_i(2).to_s(SocialHash.configuration.base)
+      end
     end
     
     def find_binary(coordinate)
