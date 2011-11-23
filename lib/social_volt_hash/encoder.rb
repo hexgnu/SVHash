@@ -12,18 +12,20 @@ module SocialHash
     end
     
     def encode(*coordinates)
-      if coordinates.length != dimension
-        raise SocialHash::TooManyDimensionsError
+      
+      coords = Array(coordinates).flatten
+      if coords.length != dimension
+        raise SocialHash::IncorrectDimensionsError, "Coordinates given #{coords.length} does not equal #{dimension} dimension"
       end
       #       
       # There seems to be a weird issue with ruby and this...
       # Don't do [range] * coordinates.length cause it'll cause
       # reference errors
-      guesses = coordinates.length.times.map { [min,max] } 
-      binary_coordinates = coordinates.length.times.map { [] }
+      guesses = coords.length.times.map { [min,max] } 
+      binary_coordinates = coords.length.times.map { [] }
         
       
-      coordinates.each_with_index do |c, i|
+      coords.each_with_index do |c, i|
         binary_coordinates[i].concat(find_binary(c))
       end
       
