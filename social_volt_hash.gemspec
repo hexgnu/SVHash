@@ -5,7 +5,7 @@ require 'social_volt_hash/version'
 
 Gem::Specification.new do |s|
   s.name          = "SocialVoltHash"
-  s.version       = SocialVolt::Hash::Version
+  s.version       = '0.0.4'
   s.platform      = Gem::Platform::RUBY
   s.authors       = ["Matt Kirk"]
   s.email         = ["matt@socialvolt.com"]

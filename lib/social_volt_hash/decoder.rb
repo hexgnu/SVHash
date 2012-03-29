@@ -7,12 +7,9 @@ module SocialHash
       
       if args[1] >= args[2]
         raise SocialHash::MaxMinBackwardsError
-      end
-      
+      end  
       super
-      
     end
-    
     
     def decode(hash)
       binary = ("0" + hash.to_i(Geomash::BASE).to_s(2)).split(//)
