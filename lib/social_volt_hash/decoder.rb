@@ -15,7 +15,7 @@ module SocialHash
     
     
     def decode(hash)
-      binary = ("0" + hash.to_i(SocialHash.configuration.base).to_s(2)).split(//)
+      binary = ("0" + hash.to_i(Geomash::BASE).to_s(2)).split(//)
       coordinates = dimension.times.map {|_| [] }
       
       binary.each_slice(dimension) do |slice|

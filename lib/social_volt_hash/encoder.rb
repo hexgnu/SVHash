@@ -42,11 +42,7 @@ module SocialHash
         end
       end
       
-      if SocialHash.configuration.base == 10
-        binary.to_i(2)
-      else
-        binary.to_i(2).to_s(SocialHash.configuration.base)
-      end
+      binary.to_i(2).to_s(Geomash::BASE)
     end
     
     def find_binary(coordinate)
