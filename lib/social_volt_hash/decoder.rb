@@ -13,7 +13,7 @@ module SocialHash
     
     def decode(hash)
       binary = ("0" + hash.to_i(Geomash::BASE).to_s(2)).split(//)
-      coordinates = dimension.times.map {|_| [] }
+      coordinates = dimension.times.map { [] }
       
       binary.each_slice(dimension) do |slice|
         slice.each_with_index do |coord, index|
